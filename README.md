@@ -1,7 +1,10 @@
 # re-scripts
 IDA, Radare2 and Bninja scripts
 
-# fnd-native-on-apks.py
+## Radare2 scripts
+- Install `r2pipe`
+
+### fnd-native-on-apks.py
 ```c
 [00:52 edu@de11 r2] > python3 fnd-native-on-apks.py classes.dex
 Lktnznvzk/B8JGragL;->e0BKigvZ(Ljava/lang/String;)V
