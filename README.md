@@ -2,7 +2,8 @@
 IDA, Radare2 and Bninja scripts
 
 ## Radare2 scripts
-- Install `r2pipe`
+- Install Radare2 API:
+    + `sudo pip3 install r2pipe`
 
 ### fnd-native-on-apks.py
 ```c
