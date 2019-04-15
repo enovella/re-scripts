@@ -1,5 +1,5 @@
 # re-scripts
-IDA, Radare2 and Bninja scripts
+IDA, Ghidra and Radare2 scripts
 
 ## Radare2 scripts
 - Install Radare2 API:
