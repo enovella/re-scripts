@@ -1,0 +1,4 @@
+\dc
+!sleep 5
+.\dm*
+(,s+0x1000,pm)()@@map.*~OAT
