@@ -1,0 +1,4 @@
+\dc
+!sleep 5
+.\dm*
+pm @@ map.*~DEX
