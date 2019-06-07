@@ -10,6 +10,7 @@ import requests
 import zipfile
 import logging
 import traceback
+import fileinput
 import os
 
 HOME = os.environ['HOME']
@@ -32,7 +33,6 @@ download_file(
     f"/tmp/jadx-{version}.zip"
 )
 
-
 print(f"Extracting to: {DST_FOLDER}")
 try:
     zf = zipfile.ZipFile(f"/tmp/jadx-{version}.zip", 'r')
@@ -42,5 +42,12 @@ except Exception as e:
     tb = traceback.format_exc()
     logging.error(f"error extracting {apk}: {e}\n{tb}")
 
-os.chmod(os.path.join(DST_FOLDER,"bin/jadx"), 0o775)
-os.chmod(os.path.join(DST_FOLDER,"bin/jadx-gui"), 0o775)
+jadx = os.path.join(DST_FOLDER,"bin/jadx")
+jadx_gui = os.path.join(DST_FOLDER,"bin/jadx-gui")
+os.chmod(jadx, 0o775)
+os.chmod(jadx_gui, 0o775)
+
+for line in fileinput.input([jadx], inplace=True):
+    print(line.replace('-Xmx4g', '-Xmx8g'), end='')
+for line in fileinput.input([jadx_gui], inplace=True):
+    print(line.replace('-Xmx4g', '-Xmx8g'), end='')
