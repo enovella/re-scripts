@@ -6,12 +6,13 @@
 '''
 
 import re
+import os
 import requests
 import zipfile
 import logging
 import traceback
 import fileinput
-import os
+import shutil
 
 global version
 HOME       = os.environ['HOME']
@@ -83,6 +84,28 @@ def create_install_folder():
         print(f"Folder created: {DST_FOLDER}")
 
 
+def create_desktop_access(version):
+    LOGO_PATH = os.path.join(DST_FOLDER,"jadxlogo.svg")
+    DESKTOP_PATH = os.path.join(DST_FOLDER,"jadx.desktop")
+
+    desktop_f = \
+f"""[Desktop Entry]
+Type=Application
+Version={version}
+Name=JADX
+Comment=DEX decompiler
+Icon={LOGO_PATH}
+Exec={JADX_GUI}
+Terminal=false
+"""
+
+    with open(DESKTOP_PATH,'w') as f:
+        f.write(desktop_f)
+
+    shutil.copy("jadxlogo.svg", LOGO_PATH)
+    print("Copying jadx.desktop into /usr/share/applications...")
+    os.system(f"sudo cp {DESKTOP_PATH} /usr/share/applications/")
+
 def main():
     global ZIP_FILE, ZIP_FILE_TMP_PATH
 
@@ -100,6 +123,7 @@ def main():
     chmod_exec()
     increase_jvm_mem()
     add_to_path()
+    create_desktop_access(version)
 
 
 if __name__ == '__main__':
